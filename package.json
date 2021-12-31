@@ -1,0 +1,12 @@
+{
+  "name": "UpTask",
+  "version": "1.0.0",
+  "description": "UpTask project, built with Node.js and MVC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Pedro Fumero",
+  "license": "ISC"
+}
