@@ -1,6 +1,9 @@
 const path = require('path')
 const express = require('express')
 
+// Helpers
+const helpers = require('./helper')
+
 // DB connection
 const db = require('./config/db')
 // Models
@@ -25,6 +28,12 @@ app.set('views', path.join(__dirname, 'views'))
 // Middlewares
 // Public folder for static files
 app.use(express.static(path.join(__dirname, 'public')))
+
+// Putting vardump on any request
+app.use((req, res, next) => {
+  res.locals.vardump = helpers.vardump
+  next()
+})
 
 // Allow inputs for POST method
 app.use(express.urlencoded({ extended: false }))
