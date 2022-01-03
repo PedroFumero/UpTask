@@ -8,8 +8,10 @@ const helpers = require('./helper')
 const db = require('./config/db')
 // Models
 const Project = require('./models/Project')
+const Task = require('./models/Task')
 
 db.sync()
+  // db.sync({ force: true })
   .then(() => {
     console.log('Succesful connected to DB')
   })

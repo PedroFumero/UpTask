@@ -1,6 +1,9 @@
 extends layouts/layout
 
+include mixins/createProject
+
 block content 
+    //- pre= vardump(project)
     .contenido-principal 
         h1 #{pageName}
 
@@ -8,10 +11,7 @@ block content
             each error in errors
                 .alerta.error #{error.text}
 
+        +createProject(project)
 
-        form(class="agregar-proyecto" action="/new-project" method="POST") 
-            .campo
-                label(for="name") Project name:
-                input(type="text", name="name" id="name" placeholder="Project name")
-            .campo.enviar 
-                input(type="submit", value="Add" class="boton")
+
+        

@@ -1,0 +1,9 @@
+mixin createProject(project= {})
+    form(class="agregar-proyecto" action=`${editMode ? '/projects/edit' : '/new-project' }` method="POST")
+        if editMode
+            input(type="hidden", name="projectId" value= project.id)
+        .campo
+            label(for="name") Project name:
+            input(type="text", name="name" id="name" placeholder="Project name" value=project.name)
+        .campo.enviar 
+            input(type="submit", value=`${project.name ? 'Edit' : 'Add'}` class="boton")

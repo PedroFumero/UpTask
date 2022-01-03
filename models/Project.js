@@ -5,7 +5,7 @@ const slug = require('slug')
 const db = require('../config/db')
 
 const Project = db.define(
-  'proyects',
+  'projects',
   {
     id: {
       type: Sequelize.INTEGER,
@@ -13,10 +13,10 @@ const Project = db.define(
       autoIncrement: true,
     },
     name: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING(100),
     },
     url: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING(100),
     },
   },
   {
