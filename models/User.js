@@ -36,6 +36,12 @@ const User = db.define(
         },
       },
     },
+    active: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false,
+    },
+    token: { type: Sequelize.STRING },
+    expiration: { type: Sequelize.DATE },
   },
   {
     hooks: {
@@ -51,6 +57,6 @@ User.prototype.verifyPassword = function (password) {
   return bcrypt.compareSync(password, this.password)
 }
 
-// User.hasMany(Project)
+User.hasMany(Project)
 
 module.exports = User

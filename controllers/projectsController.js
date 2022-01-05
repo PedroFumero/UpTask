@@ -2,12 +2,16 @@ const Project = require('../models/Project')
 const Task = require('../models/Task')
 
 const getHome = async (req, res, next) => {
-  const projects = await Project.findAll()
+  const projects = await Project.findAll({
+    where: { userId: res.locals.user.id },
+  })
   res.render('index', { pageName: 'Projects', projects })
 }
 
 const getNewProject = async (req, res, next) => {
-  const projects = await Project.findAll()
+  const projects = await Project.findAll({
+    where: { userId: res.locals.user.id },
+  })
   res.render('newProject', {
     pageName: 'New Project',
     projects,
@@ -17,7 +21,9 @@ const getNewProject = async (req, res, next) => {
 
 const postNewProject = async (req, res, next) => {
   let { name } = req.body
-  const projects = await Project.findAll()
+  const projects = await Project.findAll({
+    where: { userId: res.locals.user.id },
+  })
   let errors = []
   if (!name) {
     errors.push({ text: 'Add a name to the project' })
@@ -32,13 +38,18 @@ const postNewProject = async (req, res, next) => {
     })
   } else {
     //   There are no errors
-    await Project.create({ name })
+    const userId = res.locals.user.id
+    // console.log('HOOLAAAAAA')
+    // console.log(res.locals.user)
+    await Project.create({ name, userId })
     res.redirect('/')
   }
 }
 
 const getProject = async (req, res, next) => {
-  const projectsPromise = Project.findAll()
+  const projectsPromise = Project.findAll({
+    where: { userId: res.locals.user.id },
+  })
   const projectPromise = Project.findOne({
     where: { url: req.params.projectSlug },
   })
@@ -59,7 +70,9 @@ const getProject = async (req, res, next) => {
 }
 
 const getEditProject = async (req, res, next) => {
-  const projectsPromise = Project.findAll()
+  const projectsPromise = Project.findAll({
+    where: { userId: res.locals.user.id },
+  })
   const projectPromise = Project.findOne({
     where: { id: req.params.projectId },
   })
@@ -83,7 +96,9 @@ const postEditProject = async (req, res, next) => {
     return res.redirect('/')
   }
 
-  const projects = await Project.findAll()
+  const projects = await Project.findAll({
+    where: { userId: res.locals.user.id },
+  })
   let errors = []
   if (!name) {
     errors.push({ text: 'Add a name to the project' })

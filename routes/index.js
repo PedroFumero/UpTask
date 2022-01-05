@@ -77,4 +77,12 @@ Router.post('/login', authController.authenticateUser)
 
 Router.get('/logout', authController.logOut)
 
+Router.get('/restore-password', usersController.getRestorePassword)
+
+Router.post('/restore-password', authController.postGenerateToken)
+
+Router.get('/restore-password/:token', authController.getResetPassword)
+
+Router.post('/restore-password/:token', authController.postResetPassword)
+
 module.exports = Router

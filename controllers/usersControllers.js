@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const { sendRecoveryToken } = require('../handlers/email')
 
 const getCreateAccount = (req, res, next) => {
   res.render('create-account', { pageName: 'Create Account' })
@@ -15,6 +16,24 @@ const postCreateAccount = async (req, res, next) => {
 
   try {
     await User.create({ email, password })
+
+    // Create URL to confirm
+    const confirmUrl = `http://${req.headers.host}/confirm/${email}`
+
+    // Create user object
+    const user = { email }
+
+    // Send E-mail
+
+    await sendRecoveryToken({
+      user,
+      subject: 'Confirm UpTask account',
+      confirmUrl,
+      file: 'confirm-account',
+    })
+
+    // Redirect
+    req.flash('correcto', "We've sent an E-mail, confirm your account")
     res.redirect('/login')
   } catch (error) {
     req.flash(
@@ -30,8 +49,13 @@ const postCreateAccount = async (req, res, next) => {
   }
 }
 
+const getRestorePassword = (req, res, next) => {
+  res.render('restore-password', { pageName: 'Restore Password' })
+}
+
 module.exports = {
   getCreateAccount,
   postCreateAccount,
   getLogin,
+  getRestorePassword,
 }

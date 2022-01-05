@@ -58,8 +58,10 @@ app.use(passport.session())
 
 // Putting vardump on any request
 app.use((req, res, next) => {
+  // console.log(req.user)
   res.locals.vardump = helpers.vardump
   res.locals.messages = req.flash()
+  res.locals.user = { ...req.user } || null
   next()
 })
 
@@ -70,3 +72,5 @@ app.use(routes)
 
 // Server listing on port 3000
 app.listen(3000)
+
+require('./handlers/email')

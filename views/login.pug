@@ -6,17 +6,22 @@ html(lang="en")
         .contenedor-formulario 
             h1 #{pageName}
 
-            if error 
-                p.alerta.error= error
+            if locals.messages
+                .alertas
+                    each category in Object.keys(locals.messages)
+                        each error in messages[category]
+                            .alerta(class=`${category}`)
+                                p= error
 
             form#formulario.caja.caja-login(action="/login" method="POST") 
                 .campo 
                     label(for="email") E-mail: 
                     input(type="email" name="email" placeholder="Your E-mail" value=email )
                 .campo 
-                    label(for="password") E-mail: 
+                    label(for="password") Password: 
                     input(type="password" name="password" placeholder="Your Password" value=password )
                 .campo.enviar
                     input.boton(type="submit", value="Login")
-                .campo
+                .campo.acciones
                     a(href="/create-account") Don't have an account yet?
+                    a(href="/restore-password") Restore password
