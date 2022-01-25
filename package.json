@@ -1,0 +1,29 @@
+{
+  "name": "uptask",
+  "version": "1.0.0",
+  "description": "UpTask project with MVC and Node.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PedroFumero/UpTask.git"
+  },
+  "author": "Pedro Fumero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PedroFumero/UpTask/issues"
+  },
+  "homepage": "https://github.com/PedroFumero/UpTask#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "express-validator": "^6.14.0",
+    "i": "^0.3.7",
+    "mysql2": "^2.3.3",
+    "npm": "^8.3.2",
+    "pug": "^3.0.2",
+    "sequelize": "^6.14.1",
+    "slug": "^5.2.0"
+  }
+}
