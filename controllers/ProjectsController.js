@@ -35,15 +35,47 @@ class ProjectsController {
 
   getProject = async (req, res, next) => {
     const { slug } = req.params
-    const project = await Project.findOne({ where: { url: slug } })
+    const projectsPromise = Project.findAll()
+    const projectPromise = Project.findOne({ where: { url: slug } })
+
+    const [projects, project] = await Promise.all([
+      projectsPromise,
+      projectPromise,
+    ])
 
     if (!project) {
       return next()
     }
 
-    const projects = await Project.findAll()
-
     res.render('tasks', { title: 'Project Tasks', projects, project })
+  }
+
+  getEditProject = async (req, res) => {
+    const projectsPromise = Project.findAll()
+    const projectPromise = Project.findOne({ where: { id: req.params.id } })
+
+    const [projects, project] = await Promise.all([
+      projectsPromise,
+      projectPromise,
+    ])
+
+    res.render('new-project', { title: 'Edit Project', projects, project })
+  }
+
+  postEditProject = async (req, res) => {
+    const { id, name, slug } = req.body
+    // const project = await Project.findByPk(id)
+    await Project.update({ name }, { where: { id } })
+    res.redirect(`/projects/${slug}`)
+  }
+
+  deleteProject = async (req, res) => {
+    const { id } = req.query
+    const deleted = await Project.destroy({ where: { id } })
+    if (!deleted) {
+      return res.status(500).json({ deleted: false })
+    }
+    res.status(200).json({ deleted: true })
   }
 }
 

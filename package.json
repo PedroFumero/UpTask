@@ -4,7 +4,8 @@
   "description": "UpTask project with MVC and Node.js",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "watch": "webpack -w --mode development"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/PedroFumero/UpTask#readme",
   "dependencies": {
+    "axios": "^0.25.0",
     "express": "^4.17.2",
     "express-validator": "^6.14.0",
     "i": "^0.3.7",
@@ -24,6 +26,14 @@
     "npm": "^8.3.2",
     "pug": "^3.0.2",
     "sequelize": "^6.14.1",
-    "slug": "^5.2.0"
+    "slug": "^5.2.0",
+    "sweetalert2": "^11.3.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.12",
+    "@babel/preset-env": "^7.16.11",
+    "babel-loader": "^8.2.3",
+    "webpack": "^5.67.0",
+    "webpack-cli": "^4.9.2"
   }
 }

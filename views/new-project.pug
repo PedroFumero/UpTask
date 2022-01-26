@@ -1,4 +1,5 @@
 extends layouts/main-layout
+include mixins/create-project
 
 block content
     .contenido-principal 
@@ -8,9 +9,4 @@ block content
             each error in errors
                 .alerta.error #{error.text}
 
-        form.agregar-proyecto(action="/new-project" method="POST")
-            .campo
-                label(for="name") Project's name: 
-                input#name(type="text" name="name" placeholder="Project's name")
-            .campo.enviar
-                input.boton(type="submit", value="Add")
+        +create-project(project)

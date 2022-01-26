@@ -2,6 +2,19 @@ extends layouts/main-layout
 
 block content
     .contenido-principal 
-        h1 #{title}
+        h1 #{title} - #{project.name}
+
+        form.agregar-tarea(action=`/projects/${project.url}` method="post") 
+            .campo
+                label(for="task") Task:
+                input.nombre-tarea(type="text" name="task" id="task" placeholder="Task name")
+            .campo.enviar 
+                input.boton.nueva-tarea(type="submit", value="Add")
+
+        .contenedor-acciones
+            a.boton(href=`/projects/edit/${project.id}`) Edit Project
+            button#eliminar-proyecto.boton.eliminar(type="button" data-project-id=project.id) Delete Project
+
+
 
         
