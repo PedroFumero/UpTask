@@ -1,4 +1,4 @@
-const { Project } = require('../models')
+const { Project, Task } = require('../models')
 
 class ProjectsController {
   getHome = async (req, res) => {
@@ -47,7 +47,9 @@ class ProjectsController {
       return next()
     }
 
-    res.render('tasks', { title: 'Project Tasks', projects, project })
+    const tasks = await Task.findAll({ where: { ProjectId: project.id } })
+
+    res.render('tasks', { title: 'Project Tasks', projects, project, tasks })
   }
 
   getEditProject = async (req, res) => {

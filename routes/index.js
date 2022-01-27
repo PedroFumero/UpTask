@@ -28,4 +28,8 @@ Router.delete('/projects', ProjectsController.deleteProject)
 
 Router.post('/projects/:slug', TasksController.postCreateTask)
 
+Router.patch('/tasks/:taskId', TasksController.patchChangeTaskStatus)
+
+Router.delete('/tasks/:taskId', TasksController.deleteTask)
+
 module.exports = Router
