@@ -2,6 +2,7 @@
 const path = require('path')
 // Third party modules
 const express = require('express')
+const flash = require('connect-flash')
 
 // Helpers
 const helpers = require('./helpers')
@@ -38,6 +39,9 @@ const routes = require('./routes')
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(express.static(path.join(__dirname, 'public')))
+
+// Flash messages
+app.use(flash())
 
 // Passing helpers to app
 app.use((req, res, next) => {

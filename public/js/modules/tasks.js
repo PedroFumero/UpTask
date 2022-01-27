@@ -1,6 +1,8 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
+import { updateProgress } from './functions/progress'
+
 const tasks = document.querySelector('.listado-pendientes')
 
 if (tasks) {
@@ -14,6 +16,7 @@ if (tasks) {
         .then((result) => {
           if (result.status === 200) {
             icon.classList.toggle('completo')
+            updateProgress()
           }
         })
         .catch((err) => {
@@ -40,6 +43,7 @@ if (tasks) {
               if (result.status === 200) {
                 taskHTML.parentElement.removeChild(taskHTML)
                 Swal.fire('Deleted!', 'Your task has been deleted.', 'success')
+                updateProgress()
               }
             })
             .catch((err) => {
@@ -50,5 +54,3 @@ if (tasks) {
     }
   })
 }
-
-export default tasks

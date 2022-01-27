@@ -3,7 +3,11 @@ const { body } = require('express-validator/check')
 
 const Router = express.Router()
 
-const { ProjectsController, TasksController } = require('../controllers')
+const {
+  ProjectsController,
+  TasksController,
+  UsersController,
+} = require('../controllers')
 
 Router.get('/', ProjectsController.getHome)
 
@@ -31,5 +35,8 @@ Router.post('/projects/:slug', TasksController.postCreateTask)
 Router.patch('/tasks/:taskId', TasksController.patchChangeTaskStatus)
 
 Router.delete('/tasks/:taskId', TasksController.deleteTask)
+
+Router.get('/signup', UsersController.getSignup)
+Router.post('/signup', UsersController.postSignup)
 
 module.exports = Router
