@@ -12,7 +12,15 @@ class UsersController {
       await User.create({ email, password })
       res.redirect('/login')
     } catch (error) {
-      res.render('signup', { title: 'Signup - UpTask', errors: error.errors })
+      req.flash(
+        'error',
+        error.errors.map((error) => error.message)
+      )
+      res.render('signup', {
+        title: 'Signup - UpTask',
+        errors: req.flash(),
+        email,
+      })
     }
   }
 }

@@ -7,13 +7,14 @@ html(lang="en")
             h1 Create your account on UpTask
 
             if errors
-                each error in errors
-                    p.error.alerta #{error.message}
+                .error.alerta
+                    each error in errors.error
+                        p - #{error}
 
             form#formulario.caja.caja-login(method="POST" action="/signup")
                 .campo
                     label(for="email") Email: 
-                    input(type="email", name="email" placeholder="hello@world.com")
+                    input(type="email", name="email" placeholder="hello@world.com" value=email)
                 .campo
                     label(for="password") Password: 
                     input(type="password", name="password" placeholder="Your password")

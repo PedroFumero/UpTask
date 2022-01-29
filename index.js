@@ -2,6 +2,8 @@
 const path = require('path')
 // Third party modules
 const express = require('express')
+const session = require('express-session')
+const cookieParser = require('cookie-parser')
 const flash = require('connect-flash')
 
 // Helpers
@@ -40,12 +42,23 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(express.static(path.join(__dirname, 'public')))
 
+// Enabling cookies and sessions
+app.use(cookieParser())
+app.use(
+  session({
+    secret: 'Im a secret',
+    resave: false,
+    saveUninitialized: true,
+  })
+)
+
 // Flash messages
 app.use(flash())
 
 // Passing helpers to app
 app.use((req, res, next) => {
   res.locals.vardump = helpers.vardump
+  // res.locals.messages = req.flash()
   next()
 })
 
