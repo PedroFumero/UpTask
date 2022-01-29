@@ -10,7 +10,7 @@ html(lang="en")
                 p 
                 .error.alerta
                     p - #{error}
-
+                    
             form#formulario.caja.caja-login(method="POST" action="/login")
                 .campo
                     label(for="email") Email: 
@@ -20,6 +20,7 @@ html(lang="en")
                     input(type="password", name="password" placeholder="Your password")
                 .campo.enviar
                     input.boton(type="submit", value="Login")
-                .campo
+                .campo.acciones
                     a(href="/signup") Don't have an account yet? Register now
+                    a(href="/reset-password") Forgot password?
 

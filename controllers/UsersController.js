@@ -31,6 +31,10 @@ class UsersController {
       error,
     })
   }
+
+  getResetPassword = (req, res, next) => {
+    res.render('reset-password', { title: 'Reset password' })
+  }
 }
 
 module.exports = new UsersController()
