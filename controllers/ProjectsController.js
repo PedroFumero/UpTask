@@ -2,18 +2,17 @@ const { Project, Task } = require('../models')
 
 class ProjectsController {
   getHome = async (req, res) => {
-    const projects = await Project.findAll()
-
+    const projects = await Project.findAll({ where: { UserId: req.user } })
     res.render('home', { title: 'Home', projects })
   }
 
   getNewProject = async (req, res) => {
-    const projects = await Project.findAll()
+    const projects = await Project.findAll({ where: { UserId: req.user } })
     res.render('new-project', { title: 'New Project', projects })
   }
 
   postNewProject = async (req, res) => {
-    const projects = await Project.findAll()
+    const projects = await Project.findAll({ where: { UserId: req.user } })
     const { name } = req.body
     let errors = []
 
@@ -28,15 +27,19 @@ class ProjectsController {
         projects,
       })
     } else {
-      await Project.create({ name })
+      const userId = req.user
+
+      await Project.create({ name, UserId: userId })
       res.redirect('/')
     }
   }
 
   getProject = async (req, res, next) => {
     const { slug } = req.params
-    const projectsPromise = Project.findAll()
-    const projectPromise = Project.findOne({ where: { url: slug } })
+    const projectsPromise = Project.findAll({ where: { UserId: req.user } })
+    const projectPromise = Project.findOne({
+      where: { url: slug, UserId: req.user },
+    })
 
     const [projects, project] = await Promise.all([
       projectsPromise,
@@ -53,8 +56,10 @@ class ProjectsController {
   }
 
   getEditProject = async (req, res) => {
-    const projectsPromise = Project.findAll()
-    const projectPromise = Project.findOne({ where: { id: req.params.id } })
+    const projectsPromise = Project.findAll({ where: { UserId: req.user } })
+    const projectPromise = Project.findOne({
+      where: { id: req.params.id, UserId: req.user },
+    })
 
     const [projects, project] = await Promise.all([
       projectsPromise,

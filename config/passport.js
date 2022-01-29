@@ -33,8 +33,8 @@ passport.serializeUser((user, cb) => {
   cb(null, user.id)
 })
 
-passport.deserializeUser((user, cb) => {
-  cb(null, user)
+passport.deserializeUser((id, cb) => {
+  cb(null, id)
 })
 
 module.exports = passport

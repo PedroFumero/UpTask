@@ -53,6 +53,6 @@ User.prototype.passwordIsRight = function (password) {
   return result
 }
 
-// User.hasMany(Project)
+User.hasMany(Project)
 
 module.exports = User
