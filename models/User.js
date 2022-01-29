@@ -47,6 +47,12 @@ const User = db.define(
   }
 )
 
-User.hasMany(Project)
+// Custom methods
+User.prototype.passwordIsRight = function (password) {
+  const result = bcrypt.compareSync(password, this.password)
+  return result
+}
+
+// User.hasMany(Project)
 
 module.exports = User

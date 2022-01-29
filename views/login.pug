@@ -4,14 +4,14 @@ html(lang="en")
         include partials/header
     body.login
         .contenedor-formulario
-            h1 Create account - UpTask
-
-            if errors
+            h1 Login - UpTask
+            
+             if error
+                p 
                 .error.alerta
-                    each error in errors.error
-                        p - #{error}
+                    p - #{error}
 
-            form#formulario.caja.caja-login(method="POST" action="/signup")
+            form#formulario.caja.caja-login(method="POST" action="/login")
                 .campo
                     label(for="email") Email: 
                     input(type="email", name="email" placeholder="hello@world.com" value=email)
@@ -19,6 +19,7 @@ html(lang="en")
                     label(for="password") Password: 
                     input(type="password", name="password" placeholder="Your password")
                 .campo.enviar
-                    input.boton(type="submit", value="Create account")
+                    input.boton(type="submit", value="Login")
                 .campo
-                    a(href="/login") Back to login
+                    a(href="/signup") Don't have an account yet? Register now
+

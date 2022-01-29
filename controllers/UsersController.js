@@ -23,6 +23,14 @@ class UsersController {
       })
     }
   }
+
+  getLogin = (req, res, next) => {
+    const { error } = req.flash()
+    res.render('login', {
+      title: 'Login - UpTask',
+      error,
+    })
+  }
 }
 
 module.exports = new UsersController()

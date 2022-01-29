@@ -7,36 +7,72 @@ const {
   ProjectsController,
   TasksController,
   UsersController,
+  AuthController,
 } = require('../controllers')
 
-Router.get('/', ProjectsController.getHome)
+Router.get('/', AuthController.userAuthenticated, ProjectsController.getHome)
 
-Router.get('/new-project', ProjectsController.getNewProject)
+Router.get(
+  '/new-project',
+  AuthController.userAuthenticated,
+  ProjectsController.getNewProject
+)
 Router.post(
   '/new-project',
+  AuthController.userAuthenticated,
   body('name').not().isEmpty().trim().escape(),
   ProjectsController.postNewProject
 )
 
-Router.get('/projects/:slug', ProjectsController.getProject)
+Router.get(
+  '/projects/:slug',
+  AuthController.userAuthenticated,
+  ProjectsController.getProject
+)
 
-Router.get('/projects/edit/:id', ProjectsController.getEditProject)
+Router.get(
+  '/projects/edit/:id',
+  AuthController.userAuthenticated,
+  ProjectsController.getEditProject
+)
 
 Router.post(
   '/edit-project',
+  AuthController.userAuthenticated,
   body('name').not().isEmpty().trim().escape(),
   ProjectsController.postEditProject
 )
 
-Router.delete('/projects', ProjectsController.deleteProject)
+Router.delete(
+  '/projects',
+  AuthController.userAuthenticated,
+  ProjectsController.deleteProject
+)
 
-Router.post('/projects/:slug', TasksController.postCreateTask)
+Router.post(
+  '/projects/:slug',
+  AuthController.userAuthenticated,
+  TasksController.postCreateTask
+)
 
-Router.patch('/tasks/:taskId', TasksController.patchChangeTaskStatus)
+Router.patch(
+  '/tasks/:taskId',
+  AuthController.userAuthenticated,
+  TasksController.patchChangeTaskStatus
+)
 
-Router.delete('/tasks/:taskId', TasksController.deleteTask)
+Router.delete(
+  '/tasks/:taskId',
+  AuthController.userAuthenticated,
+  TasksController.deleteTask
+)
 
 Router.get('/signup', UsersController.getSignup)
 Router.post('/signup', UsersController.postSignup)
+
+Router.get('/login', UsersController.getLogin)
+Router.post('/login', AuthController.userAuthenticate)
+
+Router.get('/logout', AuthController.destroySession)
 
 module.exports = Router

@@ -5,6 +5,7 @@ const express = require('express')
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
 const flash = require('connect-flash')
+const passport = require('./config/passport')
 
 // Helpers
 const helpers = require('./helpers')
@@ -51,6 +52,10 @@ app.use(
     saveUninitialized: true,
   })
 )
+
+// Using passport
+app.use(passport.initialize())
+app.use(passport.session())
 
 // Flash messages
 app.use(flash())
