@@ -42,6 +42,10 @@ const User = db.define(
     expiration: {
       type: Sequelize.DATE,
     },
+    active: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false,
+    },
   },
   {
     hooks: {

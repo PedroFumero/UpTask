@@ -7,6 +7,11 @@ const cookieParser = require('cookie-parser')
 const flash = require('connect-flash')
 const passport = require('./config/passport')
 
+// Extract from dotenv
+require('dotenv').config({ path: 'variables.env' })
+const HOST = process.env.HOST || '0.0.0.0'
+const PORT = process.env.PORT || 3000
+
 // Helpers
 const helpers = require('./helpers')
 
@@ -63,7 +68,7 @@ app.use(flash())
 // Passing helpers to app
 app.use((req, res, next) => {
   res.locals.vardump = helpers.vardump
-  // res.locals.messages = req.flash()
+  // res.locals.message = req.flash()
   next()
 })
 
@@ -74,9 +79,6 @@ app.use((req, res) => {
   res.status(404).send('Not Found!')
 })
 
-app.listen(3000, () => {
-  console.log('Server running on port: 3000')
+app.listen(PORT, HOST, () => {
+  console.log(`Server running on port: ${PORT}`)
 })
-
-// // Nodemailer
-// require('./handlers/email')

@@ -69,6 +69,7 @@ Router.delete(
 
 Router.get('/signup', UsersController.getSignup)
 Router.post('/signup', UsersController.postSignup)
+Router.get('/activate/:email', UsersController.getConfirmAccount)
 
 Router.get('/login', UsersController.getLogin)
 Router.post('/login', AuthController.userAuthenticate)

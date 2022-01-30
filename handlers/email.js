@@ -10,7 +10,7 @@ const transport = nodemailer.createTransport(emailConfig)
 const generateHTML = (options) => {
   const html = pug.renderFile(
     path.join(__dirname, '..', 'views', 'emails', `${options.file}.pug`),
-    { resetURL: options.url }
+    { url: options.url }
   )
   return juice(html)
 }

@@ -4,7 +4,8 @@
   "description": "UpTask project with MVC and Node.js",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "node ./index.js",
+    "dev": "nodemon ./index.js",
     "watch": "webpack -w --mode development"
   },
   "repository": {
@@ -22,6 +23,7 @@
     "bcrypt": "^5.0.1",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.6",
+    "dotenv": "^14.3.2",
     "express": "^4.17.2",
     "express-session": "^1.17.2",
     "express-validator": "^6.14.0",

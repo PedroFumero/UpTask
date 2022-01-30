@@ -10,6 +10,11 @@ html(lang="en")
                 p 
                 .error.alerta
                     p - #{error}
+
+            if success
+                p 
+                .correcto.alerta
+                    p - #{success.success}
                     
             form#formulario.caja.caja-login(method="POST" action="/login")
                 .campo

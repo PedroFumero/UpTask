@@ -14,7 +14,7 @@ passport.use(
     // Querying to DB searching for user
     async (email, password, done) => {
       try {
-        const user = await User.findOne({ where: { email } })
+        const user = await User.findOne({ where: { email, active: 1 } })
         // Incorrect password
         if (!user.passwordIsRight(password)) {
           return done(null, false, { message: 'Incorrect password' })

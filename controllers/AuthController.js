@@ -30,7 +30,7 @@ class AuthController {
     const user = await User.findOne({ where: { email: req.body.email } })
     if (!user) {
       req.flash('error', "Provided Email doesn't exist")
-      res.render('reset-password', {
+      return res.render('reset-password', {
         title: 'Reset password',
         error: req.flash(),
       })
@@ -52,7 +52,11 @@ class AuthController {
       file: 'restore-password',
     })
 
-    return res.redirect('/login')
+    req.flash('success', 'Token was sent to Email')
+    return res.render('login', {
+      title: 'Login - UpTask',
+      success: req.flash(),
+    })
   }
 
   getResetPassword = async (req, res, next) => {
